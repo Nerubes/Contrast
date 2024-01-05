@@ -1,2 +1,6 @@
 /bin
 /build
+/bin.dbg
+/bin.bin.relwithdbg
+/bin.rel
+.vscode

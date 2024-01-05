@@ -14,6 +14,7 @@ int main(int argc, char* argv[]) {
     Mat img = imread(path, IMREAD_COLOR);
     if (img.empty()) {
         std::cout << "bad path\n";
+        return 0;
     }
 
     Mat dumb_contrast = DumbContrast(img);

@@ -1,4 +1,3 @@
-
 cmake_minimum_required(VERSION 2.8)
 
 set(CMAKE_VERBOSE_MAKEFILE True)
@@ -17,4 +16,7 @@ add_executable( Hist Hist.cpp )
 target_link_libraries( Hist ${OpenCV_LIBS} )
 add_executable( Contrast Contrast.cpp )
 target_link_libraries( Contrast ${OpenCV_LIBS} )
+
+add_executable( CreateImages CreateImages.cpp )
+target_link_libraries( CreateImages ${OpenCV_LIBS} )
 

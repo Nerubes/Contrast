@@ -60,8 +60,33 @@ void DrawHist(const Mat& img, const std::string& name) {
              Scalar(0, 0, 255), 2, 8, 0);
     }
 
-    
-
     imshow(name, img);
     imshow(name + " Hist", Hist);
+}
+
+void SaveHist(const Mat& img, std::string& name) {
+    auto channels = CreateHist(img);
+
+    Mat Hist(HIST_HEIGHT, HIST_WIDTH, CV_8UC3, Scalar(255, 255, 255));
+
+    int scale = cvRound((double)(HIST_WIDTH / AMOUNT_COLORS));
+
+    Normalize(channels[0], HIST_HEIGHT);
+    Normalize(channels[1], HIST_HEIGHT);
+    Normalize(channels[2], HIST_HEIGHT);
+
+    for( int i = 1 ; i < AMOUNT_COLORS; ++i) {
+        line(Hist, Point(scale * (i - 1), HIST_HEIGHT - cvRound(channels[0][i - 1])),
+             Point(scale * i, HIST_HEIGHT - cvRound(channels[0][i])),
+             Scalar(255, 0, 0), 2, 8, 0);
+        line(Hist, Point(scale * (i - 1), HIST_HEIGHT - cvRound(channels[1][i - 1])),
+             Point(scale * i, HIST_HEIGHT - cvRound(channels[1][i])),
+             Scalar(0, 255, 0), 2, 8, 0);
+        line(Hist, Point(scale * (i - 1), HIST_HEIGHT - cvRound(channels[2][i - 1])),
+             Point(scale * i, HIST_HEIGHT - cvRound(channels[2][i])),
+             Scalar(0, 0, 255), 2, 8, 0);
+    }
+
+    imwrite(name + ".jpg", img);
+    imwrite(name + "Hist.jpg", Hist);
 }
